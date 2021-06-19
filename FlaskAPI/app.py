@@ -1,14 +1,11 @@
 import flask
-from flask import Flask, jsonify, request
-import json
+from flask import Flask, render_template, request,jsonify
 from data_input import data_in
 import numpy as np
 import pickle
 import streamlit as st
 import joblib
 
-st.title('Data Scientist Salary Predictor')
-st.title('Covid-19')
 
 
 def load_models():
@@ -18,10 +15,12 @@ def load_models():
         model = data['model']
     return model
 
-st.markdown(
-    "**All the fields  are mandatory")
+
 
 app = Flask(__name__)
+@app.route('/',methods=['GET'])
+def Home():
+    return render_template('index.html')
 @app.route('/predict', methods=['GET'])
 def predict():
     # stub input features
